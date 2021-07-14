@@ -1,0 +1,93 @@
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<p>test2 works!</p>
+<form [formGroup]="formGroup" (ngSubmit)="register()">
+  <label for="registeredOn">Registered On</label>
+  <input name="registeredOn"
+        formControlName="registeredOn"
+        type="datetime-local"   />
+    <input name="registeredOn2"
+    formControlName="registeredOn2"
+    type="datetime-local" />
+        
+        
+  <label for="name">Name</label>
+  <input name="name"
+        formControlName="name"
+        type="text" />
+  <label for="email">E-mail</label>
+  <input name="email"
+        formControlName="email"
+        type="email" />
+  <label for="password">Password</label>
+  <input name="password"
+        formControlName="password"
+        type="password" />
+        
+        <label for="edad">Edad</label>
+  <input name="edad"
+        formControlName="edad"
+        type="text"  />
+        
+        <label for="edad2">Edad2</label>
+        <input name="edad2"
+              formControlName="edad2"
+              type="text" />
+        
+        
+        <!-- <button (click)="register()"
+    [disabled]="formGroup.invalid && bandera2==true">Register me!</button> -->
+    <button (click)="register()">Register me!</button>
+
+</form>
+
+  <!-- <p *ngIf="bandera2===true; else menor">fecha inicio debe ser menor</p>
+<ng-template #menor><p>Esta bien</p></ng-template>  -->
+
+
+  <!-- <span>{{ getErrorName('registeredOn','registeredOn2')}}</span> -->
+  
+  
+  
+  
+<!-- <span>{{ getError('email')}}</span>
+<span>{{ getError('password')}}</span>   -->
+
+<!-- <span  *ngIf="formGroup.get('edad2')?.errors  && formGroup.get('edad2')?.touched"> errores</span> -->
+
+   
+
+<!-- <span *ngIf="bandera2">error edades</span> -->
+
+<div class="alert alert-danger"  *ngIf="formGroup.get('edad2')?.errors && formGroup.get('edad2')?.dirty">  
+      
+   <!-- <p  *ngIf="formGroup.get('edad2')?.hasError('required')">
+      Es un campo requerido
+    </p>  -->
+    
+  <!--  <p  *ngIf="formGroup.get('edad2')?.hasError('min')">
+      valor minimo erroneo
+    </p> 
+    <p  *ngIf="formGroup.get('edad2')?.hasError('max')">
+      valor maximo erroneo
+    </p>
+    <p  *ngIf="formGroup.get('edad2')?.hasError('nullValidator')">
+      valor nulo erroneo
+    </p> -->
+    <!-- <p  *ngIf="formGroup.get('edad2')?.hasError('edadmenor')">
+      Edad erronea(menor)
+    </p> -->
+   <!-- <p  *ngIf="formGroup.get('date1')?.hasError('validarFecha')">
+    
+  </p>
+  fecha menor   -->
+    <p  *ngIf="formGroup.get('edad2')?.hasError('pattern')">
+      error en la expresion
+  </p>
+   
+  
+  
+  </div>
+<!-- <span>{{ validarTest("edad","edad2")}}</span>  -->

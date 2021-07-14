@@ -1,0 +1,89 @@
+<div class="container">
+    <h3>Módulo Reportar Servicio</h3>
+    <br>
+    <br>
+    <form [formGroup]="formGroup" (ngSubmit)=addReporte(formGroup.value)>
+        <div class="form-group col-sm-6">
+            <label for="exampleInputEmail1">Identificación Tecnico</label>
+            <input type="text" class="form-control" cols="20" formControlName="idtecnico" aria-describedby="emailHelp"
+                placeholder="id tecnico">
+        </div>
+        <div class="form-group col-sm-6">
+            <label for="exampleInputEmail2">1- Servicio Normal. 2- Servicio de Emergencia </label>             
+            <input type="text" class="form-control" formControlName="idservicio" placeholder="id servicio">
+        </div>
+        <div class="form-group col-sm-6">           
+            <label for="form7">Fecha y hora de inicio del Servicio</label>           
+            <input type="datetime-local" class="form-control" formControlName="fechainicio" (blur)="compareTwoDates()">           
+        </div>
+        <div class="form-group col-sm-6">
+            <div class="md-form">
+                <label for="form7">Fecha y hora de fin del Servicio</label>               
+                <input type="datetime-local" class="form-control" formControlName="fechafin" (blur)="compareTwoDates()">
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary btn-lg">Enviar</button>
+    </form>
+
+    <!-- VALIDACIONES -->
+
+    <!-- validaciones idServicio -->
+    <div class="alert alert-danger"
+        *ngIf="formGroup.get('idservicio')?.errors && (formGroup.get('idservicio')?.dirty || formGroup.get('idservicio')?.touched)">
+        <p *ngIf="formGroup.get('idservicio')?.hasError('pattern')"> 
+            idservicio: debe digitar solo números
+        </p>
+        <p *ngIf="formGroup.get('idservicio')?.hasError('min') && formGroup.get('idservicio')?.hasError('max')">
+        </p>
+        id servicio debe ser 1 o 2
+        <p *ngIf="formGroup.get('idservicio')?.hasError('required')">
+            idservicio: campo obligatorio
+        </p>
+
+    </div>
+
+    <!-- validaciones idtecnico -->
+    <div class="alert alert-danger"
+        *ngIf="formGroup.get('idtecnico')?.errors && (formGroup.get('idtecnico')?.dirty || formGroup.get('idtecnico')?.touched)">
+        <p *ngIf="formGroup.get('idtecnico')?.hasError('pattern')">
+            id tecnico: debe digitar un id valido sin espacios, ni caracteres especiales
+        </p>
+        <p *ngIf="formGroup.get('idtecnico')?.hasError('required')">
+            idtecnico: campo obligatorio
+        </p>
+
+    </div>
+
+    <!-- validaciones fecha inicio -->
+    <div class="alert alert-danger"
+        *ngIf="formGroup.get('fechainicio')?.errors &&(formGroup.get('fechainicio')?.touched) || formGroup.get('fechafin')?.errors &&(formGroup.get('fechafin')?.touched)">
+        <p *ngIf="formGroup.get('fechainicio')?.hasError('required') || formGroup.get('fechafin')?.hasError('required')">
+            fechas: campos obligatorios
+        </p>
+    </div>
+    
+    <!--muestra  validacion de fechas -->
+    <div *ngIf="error.isError" class="alert alert-danger">
+        {{ error.errorMessage }}
+    </div> 
+
+    <!-- Respuesta de la Api -->
+    <div [style]="style_success" class="alert alert-success">
+        Datos registrados correctamente!!<br><br>
+        Identificación Tecnico: {{datos?.idtecnico}}<br>
+        Id Servicio: {{datos?.idservicio}}<br>
+        Fecha de Inicio del Servicio: {{datos?.fechainicio}}<br>
+        Fecha final del Servicio: {{datos?.fechafin}}<br>
+    </div>
+    
+    <!-- Errror en el servidor -->
+    <div [style]="style_error" class="alert alert-danger">
+        <h6>Se produjo un error en el envío de datos. Revisar el correcto envío de datos</h6>
+        error server : {{datos?.status}}<br>
+    </div>
+    
+    <!-- <div class="alert alert-success" *ngIf="formGroup.valid">
+        formulario correcto
+    </div> -->
+
+</div>

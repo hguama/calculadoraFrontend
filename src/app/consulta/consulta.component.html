@@ -1,0 +1,54 @@
+<div class="wrapper fadeInDown">
+  <div id="formContent">
+    <h3>Módulo Consultar Servicio por Semana</h3>
+    <br>
+    <br>
+    <form [formGroup]="myForm" (ngSubmit)="addConsulta(myForm.value)" novalidate>
+      <div class="form-group col-sm-4">
+        <label for="exampleInputEmail1">Identificación Tecnico</label>
+        <input type="text" class="form-control" formControlName="idtecnico" aria-describedby="emailHelp"
+          placeholder="id tecnico">
+      </div>
+      <div class="form-group col-sm-4">
+        <div class="md-form">
+          <label for="form7">Semana a buscar</label>
+          <input type="text" id="form7" class="md-text form-control" formControlName="semana" rows="2"
+            placeholder="semana">
+        </div>
+      </div>
+      <div>
+        <button type="submit" class="btn btn-primary btn-lg">Enviar</button>
+      </div>     
+    </form>
+
+    <!-- VALIDACIONES -->
+
+    <!-- Validar idtecnico -->
+    <div class="alert alert-danger"
+      *ngIf="myForm.get('idtecnico')?.errors &&(myForm.get('idtecnico')?.dirty || myForm.get('idtecnico')?.touched)">
+      <p *ngIf="myForm.get('idtecnico')?.hasError('required')">idtecnico: campo es requerido</p>
+      <p *ngIf="myForm.get('idtecnico')?.hasError('pattern')">idtecnico: digitar sin espacios en blanco</p>
+    </div>
+    <!-- Validaciones de semana -->
+    <div class="alert alert-danger"
+      *ngIf="myForm.get('semana')?.errors && (myForm.get('semana')?.dirty || myForm.get('semana')?.touched)">
+      <p *ngIf="myForm.get('semana')?.hasError('required')">semana: campo es requerido</p>
+      <p *ngIf="myForm.get('semana')?.hasError('pattern')">semana: digitar sin espacios en blanco</p>
+      <p *ngIf="myForm.get('semana')?.hasError('min')">semana: 0 es el valor minimo aceptado</p>
+    </div>
+    <!-- Muestra la respuesta del Servidor -->
+    <div [style]="style1">
+      <h2> Resultado</h2>
+      Total Horas: {{datos.total_horas}}<br>
+      Horas Dominicales: {{datos.horas_dominicales}}<br>
+      Horas Dominicales Extra: {{datos.horas_dominicales_extra}}<br>
+      Horas Nocturnas: {{datos.horas_nocturnas}}<br>
+      Horas Notcturnas Extra: {{datos.horas_nocturnas_extra}}<br>
+      Horas Normales: {{datos.horas_normales}}<br>
+      Horas Normales Extra: {{datos.horas_normales_extra}}<br>
+      <!-- idtecnico: {{datos.id_tecnico}}<br>
+      semana: {{datos.semana}}<br> -->
+    </div>
+
+  </div>
+</div>
