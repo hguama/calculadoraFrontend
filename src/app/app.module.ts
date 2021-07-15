@@ -12,6 +12,7 @@ import {HttpClientModule  } from '@angular/common/http'; //http
 import { CommonModule } from '@angular/common';
 import { Test2Component } from './test2/test2.component';
 import { HomeComponent } from './home/home.component';
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { HomeComponent } from './home/home.component';
     ConsultaComponent,
     MenuComponent,    
     Test2Component,
-    HomeComponent
+    HomeComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
